@@ -9,6 +9,7 @@ import com.apress.messaging.annotation.ToUpper;
 import com.apress.messaging.domain.CurrencyConversion;
 import com.apress.messaging.domain.CurrencyExchange;
 import com.apress.messaging.domain.Rate;
+import com.apress.messaging.exception.BadCodeRuntimeException;
 import com.apress.messaging.repository.RateRepository;
 
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class CurrencyConversionService {
         }
 
         if ( null == codeRate || null == baseRate) {
-            throw new Exception("Bad Code Base.");
+            throw new BadCodeRuntimeException("Bad Code Base, unknown code: " + base, new CurrencyConversion(base, code, amount, -1.0F));
         }
 
         return new CurrencyConversion(
@@ -63,7 +64,7 @@ public class CurrencyConversionService {
         ).findFirst().orElse(null);
 
         if ( null == baseRate ) {
-            throw new Exception("Bad Base Code");
+            throw new BadCodeRuntimeException("Bad Base Code, unknown code: " + code, new Rate(code, -1.0F, date));
         }
 
         return Stream.concat(
