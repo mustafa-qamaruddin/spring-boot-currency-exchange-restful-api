@@ -13,13 +13,11 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-@Aspect
 @Component
+@Aspect
 public class CurrencyCodeAudit {
     
-    @Pointcut(
-        "execution(* com.apress.messaging.service.*Service.*(.., @com.apress.messaging.annotation.ToUpper (*),..))"
-    )
+    @Pointcut("execution(* com.apress.messaging.service.*Service.*(.., @com.apress.messaging.annotation.ToUpper (*),..))")
     public void methodPointcut(){}
 
     @Around("methodPointcut()")

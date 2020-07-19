@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
-@Aspect
 @Component
+@Aspect
 public class CurrencyConversionAudit {
     
     private ApplicationEventPublisher publisher;
